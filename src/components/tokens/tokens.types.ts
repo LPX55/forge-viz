@@ -25,7 +25,7 @@ export type TokensTableType = {
   priceChange: JSX.Element;
   tvl?: string;
   volume24?: string;
-  link: JSX.Element;
+  // link: JSX.Element;
 }[];
 
 /**

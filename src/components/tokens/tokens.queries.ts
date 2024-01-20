@@ -7,7 +7,7 @@ export const GET_TOKENS = gql`
       orderBy: $orderBy
       orderDirection: $orderDirection
       skip: $skip
-      where: { volumeUSD_gt: 100000, totalValueLockedUSD_gt: 1000000 }
+      where: { volumeUSD_gt: 10000, totalValueLockedUSD_gt: 10000 }
     ) {
       id
       name

@@ -1,6 +1,6 @@
+/* eslint-disable array-callback-return */
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { utils } from 'ethers';
 import { Avatar, Spacer } from '@geist-ui/core';
 import { CurrencyToAbbreviation } from 'currency-to-abbreviation';
 import { TransactionsType, TransactionsTableType } from './transactions.types';
@@ -16,7 +16,6 @@ dayjs.extend(relativeTime);
  * Table array can include JSX elements.
  */
 export const getTransactionsTableData = (transactions: TransactionsType[]) => {
-  const { getAddress } = utils;
 
   let transactionsTableData: TransactionsTableType = [];
 
@@ -73,16 +72,16 @@ export const getTransactionsTableData = (transactions: TransactionsType[]) => {
       account = burn.origin;
     }
 
-    token0Address = getAddress(token0Address);
-    token1Address = getAddress(token1Address);
-    token0Symbol = token0Symbol === 'WETH' ? 'ETH' : token0Symbol === 'WBTC' ? '(BTC)' : `${token0Symbol}`;
-    token1Symbol = token1Symbol === 'WETH' ? 'ETH' : token1Symbol === 'WBTC' ? '(BTC)' : `${token1Symbol}`;
+    // token0Address = token0Address;
+    // token1Address = token1Address;
+    token0Symbol = token0Symbol === 'WEVMOS' ? 'EVMOS' : token0Symbol === 'WBTC' ? '(BTC)' : `${token0Symbol}`;
+    token1Symbol = token1Symbol === 'WEVMOS' ? 'EVMOS' : token1Symbol === 'WBTC' ? '(BTC)' : `${token1Symbol}`;
 
     let transactionData = {
       transactions: (
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Avatar
-            src={`https://raw.githubusercontent.com/devpavan04/assets/master/blockchains/ethereum/assets/${token0Address}/logo.png`}
+            src={`https://r2.forge.trade/tokens/${token0Address}.png`}
           />
           <Spacer w={0.4} />
           {token0Symbol}
@@ -90,24 +89,24 @@ export const getTransactionsTableData = (transactions: TransactionsType[]) => {
           {type === 'Mint' ? 'and' : type === 'Swap' ? 'For' : type === 'Burn' ? 'And' : ''}
           <Spacer w={0.6} />
           <Avatar
-            src={`https://raw.githubusercontent.com/devpavan04/assets/master/blockchains/ethereum/assets/${token1Address}/logo.png`}
-          />
+            src={`https://r2.forge.trade/tokens/${token1Address}.png`}
+            />
           <Spacer w={0.4} />
           {token1Symbol}
         </div>
       ),
       transactionType: (
-        <a href={`https://etherscan.io/tx/${id}`} target='_blank'>
+        <a href={`https://escan.live/tx/${id}`} target='_blank' rel='noreferrer'>
           {type}
         </a>
       ),
       totalValue: CurrencyToAbbreviation({ inputNumber: Number(totalValue) })?.toString(),
       tokenAmount0:
-        CurrencyToAbbreviation({ inputNumber: Math.abs(Number(tokenAmount0)) })?.toString() + ' ' + token0Symbol,
+        ( Math.abs(Number(tokenAmount0))).toFixed(4)?.toString() + ' ' + token0Symbol,
       tokenAmount1:
-        CurrencyToAbbreviation({ inputNumber: Math.abs(Number(tokenAmount1)) })?.toString() + ' ' + token1Symbol,
+      ( Math.abs(Number(tokenAmount1))).toFixed(4)?.toString() + ' ' + token1Symbol,
       account: (
-        <a href={`https://etherscan.io/address/${account}`} target='_blank'>
+        <a href={`https://escan.live/address/${account}`} target='_blank'  rel='noreferrer'>
           {account.substr(0, 5) + '...' + account.slice(account.length - 5)}
         </a>
       ),

@@ -85,7 +85,6 @@ const Pools = ({ _pageSize, _totalPageCount }: PoolsPropsType) => {
           </div>
         </Table.Column>
         <Table.Column prop='volume24' label='Volume 24H' />
-        <Table.Column prop='link' label='Uniswap Info' />
       </Table>
 
       <Pagination

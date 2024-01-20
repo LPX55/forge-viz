@@ -86,7 +86,6 @@ const Tokens = ({ _pageSize, _totalPageCount }: TokensPropsType) => {
             )}
           </div>
         </Table.Column>
-        <Table.Column prop='link' label='Uniswap Info' />
       </Table>
 
       <Pagination

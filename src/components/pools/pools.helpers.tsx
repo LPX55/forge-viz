@@ -1,6 +1,5 @@
-import { utils } from 'ethers';
+/* eslint-disable array-callback-return */
 import { Avatar, Spacer } from '@geist-ui/core';
-import { ExternalLink } from '@geist-ui/icons';
 import { CurrencyToAbbreviation } from 'currency-to-abbreviation';
 import { PoolType, PoolsTableType } from './pools.types';
 
@@ -13,23 +12,20 @@ import { PoolType, PoolsTableType } from './pools.types';
  * Table array can include JSX elements.
  */
 export const getPoolsTableData = (pools: PoolType[]) => {
-  const { getAddress } = utils;
 
   let poolsTableData: PoolsTableType = [];
 
   pools.map((pool: PoolType) => {
-    const token0Address = getAddress(pool.token0.id);
-    const token1Address = getAddress(pool.token1.id);
 
     let poolData = {
       pool: (
         <>
           <Avatar
-            src={`https://raw.githubusercontent.com/devpavan04/assets/master/blockchains/ethereum/assets/${token0Address}/logo.png`}
+            src={`https://r2.forge.trade/tokens/${pool.token0.id}.png`}
           />
           <Avatar
-            src={`https://raw.githubusercontent.com/devpavan04/assets/master/blockchains/ethereum/assets/${token1Address}/logo.png`}
-          />
+            src={`https://r2.forge.trade/tokens/${pool.token1.id}.png`}
+            />
           <Spacer />
           {pool.token0.symbol === 'WETH' ? 'ETH' : pool.token0.symbol === 'WBTC' ? 'BTC' : pool.token0.symbol}/
           {pool.token1.symbol === 'WETH' ? 'ETH' : pool.token1.symbol === 'WBTC' ? 'BTC' : pool.token1.symbol}
@@ -37,11 +33,11 @@ export const getPoolsTableData = (pools: PoolType[]) => {
       ),
       tvl: CurrencyToAbbreviation({ inputNumber: Number(pool.totalValueLockedUSD) })?.toString(),
       volume24: CurrencyToAbbreviation({ inputNumber: Number(pool.poolDayData[0].volumeUSD) })?.toString(),
-      link: (
-        <a href={`https://info.uniswap.org/#/pools/${pool.id}`} target='_blank'>
-          <ExternalLink size={20} />
-        </a>
-      ),
+      // link: (
+      //   <a href={`https://info.uniswap.org/#/pools/${pool.id}`} target='_blank'>
+      //     <ExternalLink size={20} />
+      //   </a>
+      // ),
     };
 
     poolsTableData.push(poolData);

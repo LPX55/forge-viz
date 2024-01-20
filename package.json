@@ -1,6 +1,5 @@
 {
-  "homepage": "http://devpavan04.github.io/uniswap-v3-subgraph-visualization",
-  "name": "uniswap-v3-subgraph-visualization",
+  "name": "forge-viz",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -20,6 +19,7 @@
     "currency-to-abbreviation": "^2.0.1",
     "dayjs": "^1.11.6",
     "ethers": "^5.7.2",
+    "evmosdex-tokenlist": "github:forge-trade/tokenlist",
     "graphql": "^16.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

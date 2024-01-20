@@ -1,9 +1,8 @@
-import { utils } from 'ethers';
+/* eslint-disable array-callback-return */
 import { Avatar, Spacer } from '@geist-ui/core';
-import { ArrowDown, ArrowUp, ExternalLink } from '@geist-ui/icons';
+import { ArrowDown, ArrowUp } from '@geist-ui/icons';
 import { CurrencyToAbbreviation } from 'currency-to-abbreviation';
 import { TokenType, TokensTableType } from './tokens.types';
-
 /**
  * Helper function to populate geist UI's table component.
  *
@@ -12,20 +11,19 @@ import { TokenType, TokensTableType } from './tokens.types';
  *
  * Table array can include JSX elements.
  */
+
 export const getTokensTableData = (tokens: TokenType[]) => {
-  const { getAddress } = utils;
 
   let tokensTableData: TokensTableType = [];
 
   tokens.map((token: TokenType) => {
-    const tokenAddress = getAddress(token.id);
-
     let tokenData = {
       token: (
         <>
           <Avatar
-            src={`https://raw.githubusercontent.com/devpavan04/assets/master/blockchains/ethereum/assets/${tokenAddress}/logo.png`}
+            src={`https://r2.forge.trade/tokens/${token.id}.png`}
           />
+          
           <Spacer />
           {token.name === 'Wrapped Ether' ? 'Ether' : token.name === 'Wrapped BTC' ? 'Bitcoin' : token.name}{' '}
           {token.symbol === 'WETH' ? '(ETH)' : token.symbol === 'WBTC' ? '(BTC)' : `(${token.symbol})`}
@@ -35,11 +33,11 @@ export const getTokensTableData = (tokens: TokenType[]) => {
       priceChange: getPriceChange(Number(token.tokenDayData[0].open), Number(token.tokenDayData[0].close)),
       tvl: CurrencyToAbbreviation({ inputNumber: Number(token.totalValueLockedUSD) })?.toString(),
       volume24: CurrencyToAbbreviation({ inputNumber: Number(token.tokenDayData[0].volumeUSD) })?.toString(),
-      link: (
-        <a href={`https://info.uniswap.org/#/tokens/${token.id}`} target='_blank'>
-          <ExternalLink size={20} />
-        </a>
-      ),
+      // link: (
+      //   <a href={`https://info.uniswap.org/#/tokens/${token.id}`} target='_blank'>
+      //     <ExternalLink size={20} />
+      //   </a>
+      // ),
     };
 
     tokensTableData.push(tokenData);
